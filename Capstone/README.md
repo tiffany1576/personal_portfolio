@@ -47,6 +47,7 @@ Using historical prescription data from Medicaid, create forecasted outcomes for
 Key data elements:
 1. Using the OpenData API and SodaPy, acquire Kentucky Medicaid Prescription information
 2. Using the OpenFDA API, acquire the FDA full drug listing and National Drug Codes. These NDCs will be used to identify the opioid prescriptions in the Medicaid dataset
+3. Using the OpenData API and SodaPy, acquire Kentucky Medicaid Enrollment Infomration through June 2019. Supplement this data with data taken from each of the monthly reports provided by the [Kentucky Cabinet for Health and Family Services](https://chfs.ky.gov/agencies/dms/dafm/Pages/statistics.aspx)
 
 
 ### Data Cleaning and Engineering <a id = 'cleaning'></a>
@@ -62,14 +63,14 @@ In order to use the NDC as a key for both dataframes, FDA codes in 4-4-2 format 
 
 Additionally, NDC codes can expire. When looking at historical prescription data, it is possible to miss some opioids if matching on NDC codes only. The data from the FDA is updated daily, and expired codes are purged during updates. 
 
-I used the list of drugs from the FDA opioid data to flag transactions in the RX data if the product_FDA_name contained any of the names of these opioid medications. 
+I used the list of drugs from the FDA opioid data to create a list of drug names to then flag transactions in the RX data if the product_FDA_name contained any of the names of these opioid medications. 
 
 In this way, I have cross mapped opioid rx using both name and NDC. 
 
 With cleaning, I have one dataframe, merged_df, that contains all the prescription data and whether or not the prescription is for an opioid and if so, is it for an opioid used in substance abuse disorder treatment?
 
 
-    
+Enrollment data was sourced from both CMS and the KY Cabinet for Health and Family Services. 
 
 ### Models <a id = 'models'></a>
 

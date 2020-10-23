@@ -1,6 +1,6 @@
 
 ---
- ## <b>MEASURING THE IMPACT OF DOJ FUNDING IN THE OPIOID EPIDEMIC
+ ## <b>MEASURING THE IMPACT OF DOJ FUNDING IN THE OPIOID EPIDEMIC</b>
 
 ### Table of Contents
 1. [Background](#background)
@@ -10,6 +10,7 @@
 5. [Models](#models)
 6. [Outcomes](#outcomes)
 7. [Conclusions](#conclusion)
+8. [Next Steps](#next)
 
 
 ### Background <a id = 'background'></a>
@@ -29,25 +30,32 @@ Notably, Kentucky is also one of the 34 states that elected to expand their Medi
 
 
 Sources: 
-https://www.nature.com/articles/d41586-019-02686-2
-https://www.cdc.gov/drugoverdose/epidemic/index.html
-https://www.jpain.org/article/S1526-5900(14)00905-5/pdf
-https://www.govinfo.gov/content/pkg/CHRG-115hhrg29961/html/CHRG-115hhrg29961.htm
-https://www.justice.gov/opa/pr/appalachian-regional-prescription-opioid-arpo-strike-force-takedown-results-charges-against
-https://www.justice.gov/opa/pr/second-appalachian-region-prescription-opioid-strikeforce-takedown-results-charges-against-13
-https://halrogers.house.gov/press-releases?ID=6377EF8F-F7E1-49A8-B6F3-9774485C8B3F
-https://www.pharmacytimes.com/contributor/marilyn-bulloch-pharmd-bcps/2018/07/the-evolution-of-the-pdmp
-https://www.medicaid.gov/state-overviews/stateprofile.html?state=kentucky
+[Tracing the US opioid crisis to its roots](https://www.nature.com/articles/d41586-019-02686-2)
+[Understanding the Epidemic](https://www.cdc.gov/drugoverdose/epidemic/index.html)
+[The Fentanyl Story](https://www.jpain.org/article/S1526-5900(14)00905-5/pdf)
+[THE OPIOID EPIDEMIC IN APPALACHIA: ADDRESSING HURDLES TO ECONOMIC DEVELOPMENT IN THE REGION](https://www.govinfo.gov/content/pkg/CHRG-115hhrg29961/html/CHRG-115hhrg29961.htm)
+[Appalachian Regional Prescription Opioid (ARPO) Strike Force Takedown Results in Charges Against 60 Individuals, Including 53 Medical Professionals](https://www.justice.gov/opa/pr/appalachian-regional-prescription-opioid-arpo-strike-force-takedown-results-charges-against)
+[Second Appalachian Region Prescription Opioid Strikeforce Takedown Results in Charges Against 13 Individuals, Including 11 Physicians](https://www.justice.gov/opa/pr/second-appalachian-region-prescription-opioid-strikeforce-takedown-results-charges-against-13)
+[Harold Rogers Prescription Drug Monitoring Program Funding to Boost Drug Abuse Fight in Kentucky](https://halrogers.house.gov/press-releases?ID=6377EF8F-F7E1-49A8-B6F3-9774485C8B3F)
+[The Evolution of the PDMP](https://www.pharmacytimes.com/contributor/marilyn-bulloch-pharmd-bcps/2018/07/the-evolution-of-the-pdmp)
+[Medicaid & CHIP in Kentucky](https://www.medicaid.gov/state-overviews/stateprofile.html?state=kentucky)
 
-More Statistics: https://www.medicaid.gov/Medicaid-CHIP-Program-Information/By-Topics/Waivers/1115/downloads/ky/health/ky-health-sud-implement-protocol-apprvl-10052018.pdf
+[Commonwealth of Kentucky Section 1115 Substance Use Disorder (SUD) Demonstration Implementation Plan](https://www.medicaid.gov/Medicaid-CHIP-Program-Information/By-Topics/Waivers/1115/downloads/ky/health/ky-health-sud-implement-protocol-apprvl-10052018.pdf)
 
 ### Problem Statement and Goal <a id = 'goal'></a>
 Using historical prescription data from Medicaid, create forecasted outcomes for opioid prescriptions in 2018, 2019, and 2020. Compare the forecasts to the actual prescription information. Key events, legislation and funding from 2017, 2018 and 2019 should reflect in the actual prescription information being less than the predicted values. 
+
+Has the emphasis on substance use disorder prevention and treatmet, in concert with additional funding and DOJ resources, resulted in a significant decline in the amount of opioid medications dispensed in the Commonwealth of KY?
+
+
+
 ### Data Acquisition <a id = 'acquisition'></a>
 Key data elements:
 1. Using the OpenData API and SodaPy, acquire Kentucky Medicaid Prescription information
 2. Using the OpenFDA API, acquire the FDA full drug listing and National Drug Codes. These NDCs will be used to identify the opioid prescriptions in the Medicaid dataset
 3. Using the OpenData API and SodaPy, acquire Kentucky Medicaid Enrollment Infomration through June 2019. Supplement this data with data taken from each of the monthly reports provided by the [Kentucky Cabinet for Health and Family Services](https://chfs.ky.gov/agencies/dms/dafm/Pages/statistics.aspx)
+
+
 
 
 ### Data Cleaning and Engineering <a id = 'cleaning'></a>
@@ -63,24 +71,47 @@ In order to use the NDC as a key for both dataframes, FDA codes in 4-4-2 format 
 
 Additionally, NDC codes can expire. When looking at historical prescription data, it is possible to miss some opioids if matching on NDC codes only. The data from the FDA is updated daily, and expired codes are purged during updates. 
 
-I used the list of drugs from the FDA opioid data to create a list of drug names to then flag transactions in the RX data if the product_FDA_name contained any of the names of these opioid medications. 
+I used the list of drugs from the FDA opioid data to flag transactions in the RX data if the product_FDA_name contained any of the names of these opioid medications. 
 
-In this way, I have cross mapped opioid rx using both name and NDC. 
+In this way, I have cross mapped opioid prescriptions using both name and NDC. 
 
-With cleaning, I have one dataframe, merged_df, that contains all the prescription data and whether or not the prescription is for an opioid and if so, is it for an opioid used in substance abuse disorder treatment?
+I created several different slices of data, but the most useful dataframe is a timeseries that includes DEA schedule, whether or not the drug is used for MAT, and dispensations per 1000 Medicaid enrollees.
+
+Enrollment data was averaged to obtain the average enrollment within a quarter to correspond with the quarterly prescription data. Units reimbursed is a rough approximation of doses dispensed. To account for population shifts, I created a Units_per_1000 field that is the quarterly volume of dispensed doses divided by the average enrollment.
 
 
-Enrollment data was sourced from both CMS and the KY Cabinet for Health and Family Services. 
 
 ### Models <a id = 'models'></a>
 
+SARIMA/ARIMA with and without differentiation. 
+
 
 ### Outcomes<a id = 'outcomes'></a>
+Gridsearch using PMDARIMA. Both the MAT drug dispensations and non MAT drug dispensations exhibited a little seasonality, and both required two levels of differentiation for the highest accuracy using AIC testing.
+Best parameters for non MAT :  ARIMA(1,2,1)(1,1,0)[4]  
+Best parameters for MAT: Best model:  ARIMA(0,2,1)(2,1,0)[4]
+Interpret the parameters as cfg = [(p,d,q), (P,D,Q)[m], where p: Trend autoregression order. d: Trend difference order. q: Trend moving average order.
+P: Seasonal autoregressive order. D: Seasonal difference order. Q: Seasonal moving average order. m: The number of time steps for a single seasonal period.
 
+Once the SARIMA models are fit to their respective data sets, used a sliding window predictor with cross-validation. I selected 4 data points per window, 1 step at a time, and predicted 4 events in the future (use a year of data to predict a year of observations).
+
+These predictions are then compared to the actual values for the same time frame to answer the main question-- are these measures working to slow the flow of opioids?
 
 
 ### Conclusions<a id = 'conclusion'></a>
 
+Broadly speaking, overall opioid doses per 1000 are decreasing. However, this trend observation on this particular dataset isn't necessarily a bellwether indicator of success. 
+The data did not include strength per dose, which is used to determine Medical Morphine Equivalents, a standard of potency used to compare opioid medications. Physicians and their patients can choose from a wide variety of opioids of differing potencies. In other words, a physician may have decreased the number of doses prescribed to a patient, but may have increased the strength, resulting in a net (or perhaps greater) Medical Morphine Equivalency for the patient.
+
+Drugs used for the treatment of Substance Use Disorder are seeing a gradual increase in dispensation. Again, there are many other variables that factor into whether a patient participates in medication-assisted substance use disorder treatment. However, the increase in actual doses fell short of the predicted values. Overall, based on the data and models here, the Commonwealth's efforts to increase access and use of MAT for SUD have not been successful over the past couple of years.
+
+### Next Steps<a id = 'next'></a>
+
+The data, while clean, was not particularly robust. I think a monthly timeseries as opposed to quarterly would provide more accurate outcomes. 
+
+I have the opportunity to partner with a substance abuse treatment facility operator and his team in Colorado to expand on the study I've performed here for Kentucky. Our goal is to identify areas where additional medical providers are needed to expand on MAT offerings for impacted individuals. 
+
+Additionally, I plan to incorporate FBI crime data and census data, to look for other potential predictors and social determinants of health that may identify at-risk communities in need of more local treatment options and wraparound behavioral services. 
 
 
 

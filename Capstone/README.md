@@ -24,12 +24,8 @@ Kentucky is one of the states at the epicenter of the opioid public health crisi
 
 Notably, Kentucky is also one of the 34 states that elected to expand their Medicaid and CHIP program with the Affordable Healthcare Act. According to CMS/Medicaid.gov, Kentucky has enrolled over 1.4 million individuals as of June 2020. Medicaid prescription data is publicly available, and can be used to evaluate the impact of opioid interdiction efforts.
 
-
-
-
-
-
 Sources: 
+
 [Tracing the US opioid crisis to its roots](https://www.nature.com/articles/d41586-019-02686-2)
 
 [Understanding the Epidemic](https://www.cdc.gov/drugoverdose/epidemic/index.html)
@@ -55,7 +51,7 @@ Sources:
 ### Problem Statement and Goal <a id = 'goal'></a>
 Using historical prescription data from Medicaid, create forecasted outcomes for opioid prescriptions in 2018, 2019, and 2020. Compare the forecasts to the actual prescription information. Key events, legislation and funding from 2017, 2018 and 2019 should reflect in the actual prescription information being less than the predicted values. 
 
-Has the emphasis on substance use disorder prevention and treatmet, in concert with additional funding and DOJ resources, resulted in a significant decline in the amount of opioid medications dispensed in the Commonwealth of KY?
+Has the emphasis on substance use disorder prevention and treatment, in concert with additional funding and DOJ resources, resulted in a significant decline in the amount of opioid medications dispensed in the Commonwealth of KY?
 
 
 
@@ -111,6 +107,7 @@ These predictions are then compared to the actual values for the same time frame
 ### Conclusions<a id = 'conclusion'></a>
 
 Broadly speaking, overall opioid doses per 1000 are decreasing. However, this trend observation on this particular dataset isn't necessarily a bellwether indicator of success. 
+
 The data did not include strength per dose, which is used to determine Medical Morphine Equivalents, a standard of potency used to compare opioid medications. Physicians and their patients can choose from a wide variety of opioids of differing potencies. In other words, a physician may have decreased the number of doses prescribed to a patient, but may have increased the strength, resulting in a net (or perhaps greater) Medical Morphine Equivalency for the patient.
 
 Drugs used for the treatment of Substance Use Disorder are seeing a gradual increase in dispensation. Again, there are many other variables that factor into whether a patient participates in medication-assisted substance use disorder treatment. However, the increase in actual doses fell short of the predicted values. Overall, based on the data and models here, the Commonwealth's efforts to increase access and use of MAT for SUD have not been successful over the past couple of years.

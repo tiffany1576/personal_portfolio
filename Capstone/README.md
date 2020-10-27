@@ -31,16 +31,26 @@ Notably, Kentucky is also one of the 34 states that elected to expand their Medi
 
 Sources: 
 [Tracing the US opioid crisis to its roots](https://www.nature.com/articles/d41586-019-02686-2)
+
 [Understanding the Epidemic](https://www.cdc.gov/drugoverdose/epidemic/index.html)
+
 [The Fentanyl Story](https://www.jpain.org/article/S1526-5900(14)00905-5/pdf)
+
 [THE OPIOID EPIDEMIC IN APPALACHIA: ADDRESSING HURDLES TO ECONOMIC DEVELOPMENT IN THE REGION](https://www.govinfo.gov/content/pkg/CHRG-115hhrg29961/html/CHRG-115hhrg29961.htm)
+
 [Appalachian Regional Prescription Opioid (ARPO) Strike Force Takedown Results in Charges Against 60 Individuals, Including 53 Medical Professionals](https://www.justice.gov/opa/pr/appalachian-regional-prescription-opioid-arpo-strike-force-takedown-results-charges-against)
+
 [Second Appalachian Region Prescription Opioid Strikeforce Takedown Results in Charges Against 13 Individuals, Including 11 Physicians](https://www.justice.gov/opa/pr/second-appalachian-region-prescription-opioid-strikeforce-takedown-results-charges-against-13)
+
 [Harold Rogers Prescription Drug Monitoring Program Funding to Boost Drug Abuse Fight in Kentucky](https://halrogers.house.gov/press-releases?ID=6377EF8F-F7E1-49A8-B6F3-9774485C8B3F)
+
 [The Evolution of the PDMP](https://www.pharmacytimes.com/contributor/marilyn-bulloch-pharmd-bcps/2018/07/the-evolution-of-the-pdmp)
+
 [Medicaid & CHIP in Kentucky](https://www.medicaid.gov/state-overviews/stateprofile.html?state=kentucky)
 
+
 [Commonwealth of Kentucky Section 1115 Substance Use Disorder (SUD) Demonstration Implementation Plan](https://www.medicaid.gov/Medicaid-CHIP-Program-Information/By-Topics/Waivers/1115/downloads/ky/health/ky-health-sud-implement-protocol-apprvl-10052018.pdf)
+
 
 ### Problem Statement and Goal <a id = 'goal'></a>
 Using historical prescription data from Medicaid, create forecasted outcomes for opioid prescriptions in 2018, 2019, and 2020. Compare the forecasts to the actual prescription information. Key events, legislation and funding from 2017, 2018 and 2019 should reflect in the actual prescription information being less than the predicted values. 
@@ -109,7 +119,7 @@ Drugs used for the treatment of Substance Use Disorder are seeing a gradual incr
 
 The data, while clean, was not particularly robust. I think a monthly timeseries as opposed to quarterly would provide more accurate outcomes. 
 
-I have the opportunity to partner with a substance abuse treatment facility operator and his team in Colorado to expand on the study I've performed here for Kentucky. Our goal is to identify areas where additional medical providers are needed to expand on MAT offerings for impacted individuals. 
+Other opportunities include using data from other states within Appalachia to look at trends from a regional perspective.
 
 Additionally, I plan to incorporate FBI crime data and census data, to look for other potential predictors and social determinants of health that may identify at-risk communities in need of more local treatment options and wraparound behavioral services. 
 
